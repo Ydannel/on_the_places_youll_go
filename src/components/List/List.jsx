@@ -9,7 +9,8 @@ const List = ({ places, type, setType, rating, setRating, childClicked, isLoadin
   const [elRefs, setElRefs] = useState([]);
   const classes = useStyles();
 
-  // list the places when the button search is clicked
+  // (scrolled) the places located at .map
+  // _ is used to omit the first parameter
   useEffect(() => {
     setElRefs((refs) => Array(places.length).fill().map((_, i) => refs[i] || createRef()));
   }, [places]);
@@ -41,7 +42,8 @@ const List = ({ places, type, setType, rating, setRating, childClicked, isLoadin
             </Select>
           </FormControl>
           <Grid container spacing={3} className={classes.list}>
-            {places?.map((place, i) => (
+            { //list the places when the button search is clicked
+            places?.map((place, i) => (
               <Grid ref={elRefs[i]} key={i} item xs={12}>
                 <PlaceDetails selected={Number(childClicked) === i} refProp={elRefs[i]} place={place} />
               </Grid>
